@@ -68,20 +68,20 @@ function getUserOrder(){
 }
 
 function inStock(item_id, quantity){
-    var query = `SELECT stock_quantity FROM products WHERE item_id=${item_id}`;
+    var query = `SELECT stock_quantity, price FROM products WHERE item_id=${item_id}`;
 
     connection.query(query, function(err, results){
         if(err) throw err;
 
         if(results[0].stock_quantity >= quantity){
             console.log("Processing order");
-            makeOrder(item_id, quantity);
+            makeOrder(item_id, quantity, results[0].price);
         }else    
             console.log("Insufficient stock");
     });
 }
 
-function makeOrder(item_id, quantity){
+function makeOrder(item_id, quantity, price){
     var query = `UPDATE products SET stock_quantity = stock_quantity - ${quantity} WHERE ?`;
     var params = [
         { item_id: item_id }
@@ -90,6 +90,7 @@ function makeOrder(item_id, quantity){
     connection.query(query, params, function(err, results){
         if(err) throw err;
 
-        console.log(results);
+       // console.log(results);
+        console.log("Your cost: $" + (price * quantity) );
     });
 }
