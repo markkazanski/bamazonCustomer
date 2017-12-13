@@ -63,6 +63,8 @@ function managerDashboard(){
             case "Low":
                 lowInventory(managerDashboard);
                 break;
+            case "Add":
+                addInventory(managerDashboard);
             default:
                 break;
         }
@@ -84,4 +86,83 @@ function displayResults(results){
         }
         console.log(resultsList.substring(0, resultsList.length-3));
     }
+}
+
+function addInventory(callback){
+    var questions = [
+        {
+            name: "product",
+            type: "input",
+            message: "Add inventory, what product (id)?"
+        },
+        {
+            name: "quantity",
+            type: "input",
+            message: "How much?"
+        }
+    ];
+
+    inquirer
+    .prompt(questions)
+    .then(function(answer) {
+       // console.log(answer);
+
+        var query = `UPDATE products SET stock_quantity = stock_quantity + ${answer.quantity} WHERE item_id='${answer.product}'`;
+
+        connection.query( query, function(err, results){
+            if(err) throw err;
+            
+           if(results.changedRows > 0)
+                console.log("Product Changed");
+            else    
+                console.log("No Changes");
+           
+           callback(); 
+        });
+    });
+
+}
+
+
+function addNewProduct(callback){
+    var questions = [
+        {
+            name: "product_name",
+            type: "input",
+            message: "Product Name?"
+        },
+        {
+            name: "department_name",
+            type: "input",
+            message: "Department?"
+        },
+        {
+            name: "price",
+            type: "input",
+            message: "Price?"
+        },
+        {
+            name: "stock_quantity",
+            type: "input",
+            message: "Stock?"
+        }
+
+    ];
+
+    inquirer
+    .prompt(questions)
+    .then(function(answer) {
+       // console.log(answer);
+
+        var query = ``;
+
+        connection.query( query, function(err, results){
+            if(err) throw err;
+            
+            
+            
+            callback(); 
+        });
+    });
+
 }
