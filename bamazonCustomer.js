@@ -7,7 +7,8 @@ var connection = mysql.createConnection({
     port: 3306,
     user: "root",
     password: "Arseface04!",
-    database: "bamazon"
+    database: "bamazon",
+    multipleStatements: true
   });
   
   connection.connect(function(err) {
@@ -82,15 +83,20 @@ function inStock(item_id, quantity){
 }
 
 function makeOrder(item_id, quantity, price){
-    var query = `UPDATE products SET stock_quantity = stock_quantity - ${quantity} WHERE ?`;
+    var query1 = `UPDATE products SET stock_quantity = stock_quantity - ${quantity} WHERE ?;`;
+    var query2 = `UPDATE products SET product_sales = product_sales + (${quantity} * ${price}) WHERE ?`;
     var params = [
+        { item_id: item_id },
         { item_id: item_id }
     ];
 
-    connection.query(query, params, function(err, results){
+    connection.query(query1 + query2, params, function(err, results){
         if(err) throw err;
 
+        //console.log("Query1: " + query1);
+        //console.log("Query2: " + query2);
        // console.log(results);
         console.log("Your cost: $" + (price * quantity) );
+        listProducts(getUserOrder);
     });
 }
