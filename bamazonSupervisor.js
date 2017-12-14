@@ -15,8 +15,8 @@ var connection = mysql.createConnection({
     console.log("connected as id " + connection.threadId);
    
     //execute
-    //supervisorDashboard();
-    getTotalSales(1);
+    supervisorDashboard();
+    //console.log( getTotalSales("Bathroom") );
   });
 
   function supervisorDashboard(){
@@ -37,7 +37,7 @@ var connection = mysql.createConnection({
                 viewDepartments();
                 break;
             case "Create":
-                
+                createDepartment();
                 break;
             default:
                 break;
@@ -66,19 +66,51 @@ function viewDepartments(){
             }
             console.log(resultsList.substring(0, resultsList.length-3));
         }
-
+        supervisorDashboard();
     });
 }
 
 function getTotalSales(dept_id){
-    var query = `select price from products where department_name="${dept_id}";`;
+    var query = `select SUM(price) from products where department_name="${dept_id}"`;
 
     connection.query(query, function(err, results){
         if(err) throw err;
 
-        var sales_total = 0;
-
-        console.log(results);
+        return ("Total sales: " + results[0]['SUM(price)']);
     });
+}
+
+function createDepartment(){
+    var questions = [
+        {
+            name: "dept_name",
+            type: "input",
+            message: "Department Name?"
+        },
+        {
+            name: "over_head_costs",
+            type: "input",
+            message: "Overhead costs?"
+        }
+    ];
+
+    inquirer
+    .prompt(questions)
+    .then(function(answer) {
+       // console.log(answer);
+        //console.log( "Product name: " + answer.product_name);
+        
+        var query = `INSERT INTO departments (dept_name , over_head_costs) 
+        VALUES ("${answer.dept_name}", ${answer.over_head_costs});`;
+
+        connection.query( query, function(err, results){
+            if(err) throw err;
+            
+            console.log(results);
+            
+            supervisorDashboard(); 
+        });
+    });
+
 }
     
