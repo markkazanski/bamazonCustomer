@@ -6,4 +6,14 @@ CREATE TABLE departments(
     over_head_costs DECIMAL(13, 2)
 );
 
-ALTER TABLE products ADD product_sales DECIMAL(13, 2);
+INSERT INTO departments (dept_name , over_head_costs) 
+VALUES ("Kitchen", 200);
+
+INSERT INTO departments (dept_name , over_head_costs) 
+VALUES ("Electronics", 500);
+
+INSERT INTO departments (dept_name , over_head_costs) 
+VALUES ("Car", 2000);
+
+INSERT INTO departments (dept_name , over_head_costs) 
+VALUES ("Bathroom", 50);

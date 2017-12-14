@@ -77,8 +77,10 @@ function inStock(item_id, quantity){
         if(results[0].stock_quantity >= quantity){
             console.log("Processing order");
             makeOrder(item_id, quantity, results[0].price);
-        }else    
+        }else{    
             console.log("Insufficient stock");
+            listProducts(getUserOrder);
+        }
     });
 }
 

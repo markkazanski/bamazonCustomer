@@ -8,23 +8,27 @@ CREATE TABLE products(
     product_name VARCHAR(20),
     department_name VARCHAR(20),
     price DECIMAL(13, 2),
-    stock_quantity INTEGER(10)
+    stock_quantity INTEGER(10),
+    product_sales DECIMAL(13, 2) DEFAULT 0
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) 
 VALUES ("ASUS Laptop", "Electronics", 999.98, 10);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) 
-VALUES ("Monkey", "Zoo", 123456789.01, 999);
+VALUES ("Logitech Mouse", "Electronics", 24.99, 4);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) 
-VALUES ("Toaster", "Kitchen", 24.99, 16);
+VALUES ("Blender", "Kitchen", 49.88, 10);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) 
-VALUES ("Leather Couch", "Furniture", 199.201, 10);
+VALUES ("Big Sharp Knife", "Kitchen", 39.99, 5);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) 
-VALUES ("Toyota Corolla", "Car", 10500.84, 1);
+VALUES ("Toyota Corolla", "Car", 105000, 1);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity) 
-VALUES ("Unicorn", "Fantasy", 99999999999.99, 0);
+VALUES ("Toothbrush", "Bathroom", 5, 50);
+
+INSERT INTO products (product_name, department_name, price, stock_quantity) 
+VALUES ("Plunger", "Bathroom", 25, 1);
