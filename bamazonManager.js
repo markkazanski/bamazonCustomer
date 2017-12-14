@@ -65,6 +65,10 @@ function managerDashboard(){
                 break;
             case "Add":
                 addInventory(managerDashboard);
+                break;
+            case "New":
+                addNewProduct(managerDashboard);
+                break;
             default:
                 break;
         }
@@ -153,13 +157,15 @@ function addNewProduct(callback){
     .prompt(questions)
     .then(function(answer) {
        // console.log(answer);
-
-        var query = ``;
+        //console.log( "Product name: " + answer.product_name);
+        
+        var query = `INSERT INTO products (product_name, department_name, price, stock_quantity) 
+        VALUES ("${answer.product_name}", "${answer.department_name}", ${answer.price}, ${answer.stock_quantity});`;
 
         connection.query( query, function(err, results){
             if(err) throw err;
             
-            
+            console.log("Inserted " + results.affectedRows + " rows. New Id: " + results.insertId);
             
             callback(); 
         });
