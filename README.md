@@ -1,7 +1,7 @@
 # bamazonCustomer
 
 ## 1. bamazonCustomer.js
-![See bamazonCustomer GIF](1-customer.gif)
+![See bamazonCustomer GIF](gifs/1-customer.gif)
 Running script lists all rows and columns in table products. 
 1st prompt: Gives option of buying product by entering product id.
 2nd prompt: User enters quantity of products. 
