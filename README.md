@@ -15,7 +15,7 @@ Running gives 4 options:
 * Add - Adds to stock_quantity of existing products, user specifies product id and quantity to add.
 * New - User adds new product (row in products table). Prompts ask for product name, department, price and stock quantity. 
 
-## - bamazonSupervisor.js
+## 3. bamazonSupervisor.js
 ![See bamazonSupervisor GIF](gifs/3-supervisor.gif)
 Not fully functional. 
 
